@@ -1,7 +1,7 @@
 import unittest
-from ddt import ddt, data, unpack
 
 import arraysepi
+from ddt import data, ddt, unpack
 
 
 @ddt
@@ -15,7 +15,3 @@ class TestArraysEpi(unittest.TestCase):
     def test_dutch(self, idx, nums, expected):
         result = arraysepi.dutch(idx, nums)
         self.assertEqual(result, expected)
-
-
-if __name__ == '__main__':
-    unittest.main()
