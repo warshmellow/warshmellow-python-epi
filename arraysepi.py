@@ -1,8 +1,5 @@
-def mysum(nums):
-    result = 0
-    for num in nums:
-        result += num
-    return result
+def sumsum(nums):
+    return sum(nums)
 
 
 def dutch(pivot_index, nums):
