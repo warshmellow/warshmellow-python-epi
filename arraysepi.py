@@ -1,8 +1,11 @@
-def sumsum(nums):
+from typing import List
+
+
+def sumsum(nums: List[int]) -> int:
     return sum(nums)
 
 
-def dutch(pivot_index, nums):
+def dutch(pivot_index: int, nums: List[int]) -> List[int]:
     pivot = nums[pivot_index]
 
     smaller = 0
