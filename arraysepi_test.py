@@ -4,7 +4,7 @@ from typing import List
 import hypothesis.strategies as st
 from hypothesis import given
 
-import arraysepi
+from arraysepi import dutch
 
 
 class TestArraysEpi(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestArraysEpi(unittest.TestCase):
         idx = len(nums) // 2
         dist = nums[idx]
 
-        result = arraysepi.dutch(idx, nums)
+        result = dutch(idx, nums)
         new_idx = result.index(dist)
 
         all_lt = True
