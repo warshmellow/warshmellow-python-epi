@@ -1,3 +1,4 @@
 mypy==0.560
 psutil==5.4.2
 typed-ast==1.1.0
+hypothesis==3.44
