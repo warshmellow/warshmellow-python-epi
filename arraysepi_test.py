@@ -4,7 +4,7 @@ from typing import List
 import hypothesis.strategies as st
 from hypothesis import given
 
-from arraysepi import dutch
+from arraysepi import dutch, mod_three_sort
 
 
 class TestArraysEpi(unittest.TestCase):
@@ -34,3 +34,18 @@ class TestArraysEpi(unittest.TestCase):
                 break
 
         self.assertTrue(all_lt and all_gt)
+
+    @given(st.lists(
+        elements=st.integers(),
+        min_size=1
+    ))
+    def test_mod_three_sort(self, nums: List[int]):
+        result = mod_three_sort(nums)
+
+        increasing = True
+        for i in range(1, len(result)):
+            n, m = result[i - 1], result[i]
+            if (n % 3) > (m % 3):
+                increasing = False
+
+        self.assertTrue(increasing)
