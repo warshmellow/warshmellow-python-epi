@@ -1,10 +1,9 @@
 import unittest
-from typing import List
 
 import hypothesis.strategies as st
 from hypothesis import given
 
-from arraysepi import dutch, mod_three_sort
+from arraysepi import *
 
 
 class TestArraysEpi(unittest.TestCase):
@@ -49,3 +48,24 @@ class TestArraysEpi(unittest.TestCase):
                 increasing = False
 
         self.assertTrue(increasing)
+
+    @given(st.lists(
+        elements=st.integers(),
+        min_size=1
+    ))
+    def test_mod_two_stable_sort(self, nums: List[int]):
+        odds = [x for x in nums if x % 2 != 0]
+
+        result = mod_two_stable_sort(nums)
+
+        increasing = True
+        for i in range(1, len(result)):
+            n, m = result[i - 1], result[i]
+            if (n % 2) > (m % 2):
+                increasing = False
+
+        self.assertTrue(increasing)
+
+        sorted_odds = [x for x in result if x % 2 != 0]
+
+        self.assertListEqual(odds, sorted_odds)

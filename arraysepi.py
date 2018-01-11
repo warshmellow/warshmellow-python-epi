@@ -69,3 +69,21 @@ def mod_three_sort(nums: List[int]) -> List[int]:
                 lowest_eq2 = i
 
     return nums
+
+
+def mod_two_stable_sort(nums: List[int]) -> List[int]:
+    lowest_eq1 = -1
+
+    for i in range(len(nums)):
+        n = nums[i]
+        # [1, 3, 5, 0, 0] ->
+        if n % 2 == 0:
+            if lowest_eq1 > -1:
+                for j in range(i, lowest_eq1, -1):
+                    nums[j], nums[j - 1] = nums[j - 1], nums[j]
+                lowest_eq1 += 1
+        else:
+            if lowest_eq1 == -1:
+                lowest_eq1 = i
+
+    return nums
