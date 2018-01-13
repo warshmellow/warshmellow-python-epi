@@ -69,3 +69,21 @@ class TestArraysEpi(unittest.TestCase):
         sorted_odds = [x for x in result if x % 2 != 0]
 
         self.assertListEqual(odds, sorted_odds)
+
+    @given(
+        a=st.lists(elements=st.sampled_from(['1', '0'])),
+        b=st.lists(elements=st.sampled_from(['1', '0'])))
+    def test_two_bin_str(self, a: List[str], b: List[str]):
+        a_str = "".join(a)
+        b_str = "".join(b)
+
+        result = add_two_bin_str(a_str, b_str)
+
+        all_one_or_zero = True
+        for c in result:
+            if c != '1' and c != '0':
+                all_one_or_zero = False
+                break
+
+        self.assertTrue(len(result) >= max(len(a), len(b)))
+        self.assertTrue(all_one_or_zero)

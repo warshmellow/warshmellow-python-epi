@@ -87,3 +87,46 @@ def mod_two_stable_sort(nums: List[int]) -> List[int]:
                 lowest_eq1 = i
 
     return nums
+
+
+def add_two_bin_str(a, b: str) -> str:
+    if len(a) == 0 and len(b) == 0:
+        return ""
+
+    if len(a) > len(b):
+        a, b = b, a
+
+    a_rev = list(reversed(a))
+    b_rev = list(reversed(b))
+
+    result = []
+    carry_over = 0
+    for i in range(len(a)):
+        ac, bc = int(a_rev[i]), int(b_rev[i])
+
+        s = ac + bc + carry_over
+        if s > 1:
+            carry_over = 1
+        else:
+            carry_over = 0
+
+        modded_sum = s % 2
+
+        result.append(modded_sum)
+
+    left_over_b_rev = b_rev[len(a):]
+
+    for j in range(len(left_over_b_rev)):
+        bc = int(left_over_b_rev[j])
+
+        s = bc + carry_over
+        if s > 1:
+            carry_over = 1
+        else:
+            carry_over = 0
+
+        modded_sum = s % 2
+
+        result.append(modded_sum)
+
+    return "".join(reversed([str(x) for x in result]))
