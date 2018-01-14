@@ -87,3 +87,12 @@ class TestArraysEpi(unittest.TestCase):
 
         self.assertTrue(len(result) >= max(len(a), len(b)))
         self.assertTrue(all_one_or_zero)
+
+    @given(
+        a=st.lists(elements=st.sampled_from(range(10)), min_size=1),
+        b=st.lists(elements=st.sampled_from(range(10)), min_size=1))
+    def test_multiply_two_list(self, a: List[int], b: List[int]):
+        result = multiply_two_list(a, b)
+
+        self.assertEqual(multiply_two_list([1, 2, 3], [9, 8, 7]), [1, 2, 1, 4, 0, 1])
+        self.assertEqual(result[-1], (a[-1] * b[-1]) % 10)

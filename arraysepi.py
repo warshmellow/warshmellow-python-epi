@@ -130,3 +130,26 @@ def add_two_bin_str(a, b: str) -> str:
         result.append(modded_sum)
 
     return "".join(reversed([str(x) for x in result]))
+
+
+def multiply_two_list(num1, num2: List[int]) -> List[int]:
+    result = [0] * (len(num1) + len(num2))
+
+    for i in reversed(range(len(num1))):
+        for j in reversed(range(len(num2))):
+            result[i + j + 1] += num1[i] * num2[j]
+            result[i + j] += result[i + j + 1] // 10
+            result[i + j + 1] %= 10
+
+    strip_idx = 0
+    for i, x in enumerate(result):
+        if x == 0:
+            strip_idx += 1
+        else:
+            break
+
+    result_stripped = result[strip_idx:]
+    if len(result_stripped) == 0:
+        result_stripped = [0]
+
+    return result_stripped
