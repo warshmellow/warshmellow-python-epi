@@ -1,6 +1,7 @@
 import unittest
 
 import hypothesis.strategies as st
+from collections import *
 from hypothesis import given
 
 from arraysepi import *
@@ -96,3 +97,14 @@ class TestArraysEpi(unittest.TestCase):
 
         self.assertEqual(multiply_two_list([1, 2, 3], [9, 8, 7]), [1, 2, 1, 4, 0, 1])
         self.assertEqual(result[-1], (a[-1] * b[-1]) % 10)
+
+    @given(st.lists(elements=st.integers(), min_size=1))
+    def test_dedup_sorted(self, a: List[int]):
+        a.sort()
+
+        a = dedup_sorted(a)
+        c = Counter(a)
+
+        gt_one = {k: v for k, v in c.items() if v > 1}
+
+        self.assertEqual(0, len(gt_one))

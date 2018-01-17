@@ -153,3 +153,22 @@ def multiply_two_list(num1, num2: List[int]) -> List[int]:
         result_stripped = [0]
 
     return result_stripped
+
+
+def dedup_sorted(a: List[int]) -> List[int]:
+    # note that a[:write_me] is all unique
+    # so a[write_me - 1] is highest unique of a[:write_me] and only one worth comparing to
+    # once a[write_me - 1] is not a[i], we can overwrite with a[i]
+
+    # init
+    # a[:1] which is a[0] is all unique, so can't write a[0]
+    write_me = 1
+
+    # loop
+    for i in range(1, len(a)):
+        highest_unique_so_far = a[write_me - 1]
+        if highest_unique_so_far < a[i]:
+            a[write_me] = a[i]
+            write_me += 1
+
+    return a[:write_me]
