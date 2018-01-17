@@ -190,7 +190,8 @@ def remove_key_and_shift(a: List[int], key: int) -> List[int]:
             write_me += 1
             while a[write_me] != val:
                 write_me += 1
-            i = write_me
+            if i < write_me:
+                i = write_me
         else:
             i += 1
 
