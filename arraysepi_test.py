@@ -1,7 +1,6 @@
 import unittest
 
 import hypothesis.strategies as st
-from collections import *
 from hypothesis import given
 
 from arraysepi import *
@@ -103,8 +102,5 @@ class TestArraysEpi(unittest.TestCase):
         a.sort()
 
         a = dedup_sorted(a)
-        c = Counter(a)
 
-        gt_one = {k: v for k, v in c.items() if v > 1}
-
-        self.assertEqual(0, len(gt_one))
+        self.assertEqual(len(a), len(set(a)))
