@@ -104,3 +104,15 @@ class TestArraysEpi(unittest.TestCase):
         a = dedup_sorted(a)
 
         self.assertEqual(len(a), len(set(a)))
+
+    @given(st.lists(elements=st.integers(), min_size=1))
+    def test_remove_key_and_shift(self, a: List[int]):
+        key = len(a) // 2
+        val = a[key]
+        a_without_val = [x for x in a if x != val]
+
+        a = remove_key_and_shift(a, key)
+        set_a = set(a)
+
+        self.assertTrue(val not in set_a)
+        self.assertEqual(len(a), len(a_without_val))

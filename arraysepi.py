@@ -172,3 +172,26 @@ def dedup_sorted(a: List[int]) -> List[int]:
             write_me += 1
 
     return a[:write_me]
+
+
+def remove_key_and_shift(a: List[int], key: int) -> List[int]:
+    val = a[key]
+
+    # note that a[:write_me] is all missing val
+    # so a[write_me] is lowest instance containing val and we can overwrite
+    # once we see not val, we can swap with a[i]
+    # then how does write_me change? increases until sees val again. i = write_me
+    write_me = a.index(val)
+
+    i = write_me
+    while write_me < len(a) and i < len(a):
+        if a[i] != val:
+            a[write_me], a[i] = a[i], a[write_me]
+            write_me += 1
+            while a[write_me] != val:
+                write_me += 1
+            i = write_me
+        else:
+            i += 1
+
+    return a[:write_me]
