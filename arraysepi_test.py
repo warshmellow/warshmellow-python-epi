@@ -1,6 +1,7 @@
 import unittest
 
 import hypothesis.strategies as st
+from collections import Counter
 from hypothesis import given
 
 from arraysepi import *
@@ -116,3 +117,18 @@ class TestArraysEpi(unittest.TestCase):
 
         self.assertTrue(val not in set_a)
         self.assertEqual(len(a), len(a_without_val))
+
+    @unittest.skip('unfinished')
+    @given(st.lists(elements=st.integers(), min_size=16))
+    def test_overwrite_limit_sorted(self, a: List[int]):
+        limit = len(a) // 4
+
+        a.sort()
+
+        a = overwrite_limit_sorted(a, limit)
+
+        c = Counter(a)
+
+        num_at_limit = len([x for (x, cnt) in c.most_common() if cnt == limit])
+
+        self.assertEqual(num_at_limit, 0)

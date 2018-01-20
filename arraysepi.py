@@ -198,3 +198,18 @@ def remove_key_and_shift(a: List[int], key: int) -> List[int]:
             i += 1
 
     return a[:write_me]
+
+
+def overwrite_limit_sorted(a: List[int], limit: int) -> List[int]:
+    # we use a write_me index
+    # a[:write_me] has all entries that started at limit to be put to 2
+    # how to maintain invariant? see a[write_me]? or a[i]?
+    # so check if a[write_me:write_me + limit] are all a[write_me]
+
+    # 1122 33 333 44
+    # suppose a[:write_me] has all entries started at the limit be put to 2
+    # how should i update write_me in light of the a[i]?
+    # first_sight = write_me + 1
+    # a[first_sight] == a[first_sight + limit-1] and a[first_sight + limit] != a[first_sight]
+    #
+    return a
