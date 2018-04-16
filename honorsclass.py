@@ -1,4 +1,4 @@
-def halve(x):
+def halve(x: int) -> int:
     return x >> 1
 
 
