@@ -120,3 +120,7 @@ class TestArraysEpi(unittest.TestCase):
         num_at_limit = len([x for (x, cnt) in c.most_common() if cnt == limit])
 
         self.assertEqual(num_at_limit, 0)
+
+
+if __name__ == '__main__':
+    unittest.main()

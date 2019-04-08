@@ -13,3 +13,7 @@ class TestHonorsClass(unittest.TestCase):
         self.assertEqual(a % result, 0)
         self.assertEqual(b % result, 0)
         self.assertEqual(result, bin_gcd(a, b % a))
+
+
+if __name__ == '__main__':
+    unittest.main()
