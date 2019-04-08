@@ -8,12 +8,7 @@ from arraysepi import *
 
 
 class TestArraysEpi(unittest.TestCase):
-
-    @given(st.lists(
-        elements=st.integers(),
-        min_size=1,
-        unique=True
-    ))
+    @given(st.lists(elements=st.integers(), min_size=1, unique=True))
     def test_dutch(self, nums: List[int]):
         idx = len(nums) // 2
         dist = nums[idx]
@@ -35,10 +30,7 @@ class TestArraysEpi(unittest.TestCase):
 
         self.assertTrue(all_lt and all_gt)
 
-    @given(st.lists(
-        elements=st.integers(),
-        min_size=1
-    ))
+    @given(st.lists(elements=st.integers(), min_size=1))
     def test_mod_three_sort(self, nums: List[int]):
         result = mod_three_sort(nums)
 
@@ -50,10 +42,7 @@ class TestArraysEpi(unittest.TestCase):
 
         self.assertTrue(increasing)
 
-    @given(st.lists(
-        elements=st.integers(),
-        min_size=1
-    ))
+    @given(st.lists(elements=st.integers(), min_size=1))
     def test_mod_two_stable_sort(self, nums: List[int]):
         odds = [x for x in nums if x % 2 != 0]
 
@@ -71,9 +60,8 @@ class TestArraysEpi(unittest.TestCase):
 
         self.assertListEqual(odds, sorted_odds)
 
-    @given(
-        a=st.lists(elements=st.sampled_from(['1', '0'])),
-        b=st.lists(elements=st.sampled_from(['1', '0'])))
+    @given(a=st.lists(elements=st.sampled_from(['1', '0'])),
+           b=st.lists(elements=st.sampled_from(['1', '0'])))
     def test_two_bin_str(self, a: List[str], b: List[str]):
         a_str = "".join(a)
         b_str = "".join(b)
@@ -89,13 +77,13 @@ class TestArraysEpi(unittest.TestCase):
         self.assertTrue(len(result) >= max(len(a), len(b)))
         self.assertTrue(all_one_or_zero)
 
-    @given(
-        a=st.lists(elements=st.sampled_from(range(10)), min_size=1),
-        b=st.lists(elements=st.sampled_from(range(10)), min_size=1))
+    @given(a=st.lists(elements=st.sampled_from(range(10)), min_size=1),
+           b=st.lists(elements=st.sampled_from(range(10)), min_size=1))
     def test_multiply_two_list(self, a: List[int], b: List[int]):
         result = multiply_two_list(a, b)
 
-        self.assertEqual(multiply_two_list([1, 2, 3], [9, 8, 7]), [1, 2, 1, 4, 0, 1])
+        self.assertEqual(multiply_two_list([1, 2, 3], [9, 8, 7]),
+                         [1, 2, 1, 4, 0, 1])
         self.assertEqual(result[-1], (a[-1] * b[-1]) % 10)
 
     @given(st.lists(elements=st.integers(), min_size=1))
