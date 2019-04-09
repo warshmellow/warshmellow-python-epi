@@ -27,14 +27,17 @@ class TestHashTablesEpi(unittest.TestCase):
         now = time.gmtime(1554824405)
 
         c = LRUCache(1)
-        c.set("isbn1", 100, now)
-        c.set("isbn2", 200, time.gmtime(1554824405 + 1000))
+        c.insert("isbn1", 100, now)
+        c.insert("isbn2", 200, time.gmtime(1554824405 + 1000))
         self.assertEqual(len(c), 1)
         self.assertEqual(c.get("isbn1"), None)
         self.assertEqual(c.get("isbn2"), 200)
 
-        c.set("isbn2", 300, time.gmtime(1554824405 + 2000))
+        c.insert("isbn2", 300, time.gmtime(1554824405 + 2000))
         self.assertEqual(c.get("isbn2"), 200)
+
+        c.remove("isbn2")
+        self.assertEqual(c.get("isbn2"), None)
 
 
 if __name__ == '__main__':

@@ -36,7 +36,7 @@ class LRUCache:
         min_key, _ = mins(self._table)
         del self._table[min_key]
 
-    def set(self, key, value, time=time.gmtime()):
+    def insert(self, key, value, time=time.gmtime()):
         # if key exists update time but not value
         if key in self._table:
             v, _ = self._table[key]
@@ -54,3 +54,6 @@ class LRUCache:
             v, _ = self._table[key]
             self._table[key] = (v, time)
             return v
+
+    def remove(self, key):
+        del self._table[key]
