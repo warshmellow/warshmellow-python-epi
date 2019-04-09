@@ -33,6 +33,9 @@ class TestHashTablesEpi(unittest.TestCase):
         self.assertEqual(c.get("isbn1"), None)
         self.assertEqual(c.get("isbn2"), 200)
 
+        c.set("isbn2", 300, time.gmtime(1554824405 + 2000))
+        self.assertEqual(c.get("isbn2"), 200)
+
 
 if __name__ == '__main__':
     unittest.main()
