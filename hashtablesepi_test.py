@@ -23,10 +23,15 @@ class TestHashTablesEpi(unittest.TestCase):
         self.assertEqual(result, expected_cond)
 
     # 12.3
-    @unittest.skip('unfinished')
     def test_lru_cache(self):
+        now = time.gmtime(1554824405)
+
         c = LRUCache(1)
-        c.set("isbn", 100)
+        c.set("isbn1", 100, now)
+        c.set("isbn2", 200, time.gmtime(1554824405 + 1000))
+        self.assertEqual(len(c), 1)
+        self.assertEqual(c.get("isbn1"), None)
+        self.assertEqual(c.get("isbn2"), 200)
 
 
 if __name__ == '__main__':
