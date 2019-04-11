@@ -39,6 +39,20 @@ class TestHashTablesEpi(unittest.TestCase):
         c.remove("isbn2")
         self.assertEqual(c.get("isbn2"), None)
 
+    # 12.4
+    # Compute the Lowest Common Ancestor of two nodes in time
+    # proportional to distance between the nodes, and without
+    # going up to the root
+
+    # 12.5
+    # Find the nearest repeated entries in an array
+    def test_nearest_repeated(self):
+        s = """
+            All work and no play makes for
+            no work no fun and no results
+            """.split()
+        self.assertEqual(nearest_repeated(s), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

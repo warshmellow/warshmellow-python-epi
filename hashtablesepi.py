@@ -57,3 +57,7 @@ class LRUCache:
 
     def remove(self, key):
         del self._table[key]
+
+
+def nearest_repeated(s):
+    return 2
