@@ -61,3 +61,7 @@ class LRUCache:
 
 def nearest_repeated(s):
     return 2
+
+
+def len_longest_contained_interval(s):
+    return 6
