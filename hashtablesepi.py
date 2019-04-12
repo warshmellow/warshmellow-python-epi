@@ -64,4 +64,21 @@ def nearest_repeated(s):
 
 
 def len_longest_contained_interval(s):
-    return 6
+    def all_between(a):
+        first, last = a[0], a[-1]
+        if first == last:
+            return True
+        elif first < last:
+            return len([x for x in a if first <= x and x <= last]) == len(a)
+        else:
+            return len([x for x in a if first >= x and x >= last]) == len(a)
+
+    if len(s) <= 1:
+        return
+    elif len(s) == 2:
+        return 2
+
+    all_possible = [(i, j) for i in range(len(s))
+                    for j in range(i + 1, len(s)) if all_between(s[i:j])]
+
+    return max([j - i for i, j in all_possible])
