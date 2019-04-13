@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import Counter, defaultdict
 import time
 
 
@@ -60,7 +60,16 @@ class LRUCache:
 
 
 def nearest_repeated(s):
-    return 2
+    indices_by_entry = defaultdict(list)
+    for i, entry in enumerate(s):
+        indices_by_entry[entry].append(i)
+
+    h = {}
+    for entry, ind in indices_by_entry.items():
+        if len(ind) > 1:
+            h[entry] = min([ind[i] - ind[i - 1] for i in range(1, len(ind))])
+
+    return min(h.values())
 
 
 def len_longest_contained_interval(s):
