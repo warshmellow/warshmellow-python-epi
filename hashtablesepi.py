@@ -73,21 +73,30 @@ def nearest_repeated(s):
 
 
 def len_longest_contained_interval(s):
-    def all_between(a):
-        first, last = a[0], a[-1]
-        if first == last:
-            return True
-        elif first < last:
-            return len([x for x in a if first <= x and x <= last]) == len(a)
-        else:
-            return len([x for x in a if first >= x and x >= last]) == len(a)
-
     if len(s) <= 1:
         return
-    elif len(s) == 2:
+    elif len(s) == 2 and s[0] == s[1] - 1:
         return 2
+    elif len(s) == 2 and s[0] != s[1] - 1:
+        return
 
-    all_possible = [(i, j) for i in range(len(s))
-                    for j in range(i + 1, len(s)) if all_between(s[i:j])]
+    s.sort()
 
-    return max([j - i for i, j in all_possible])
+    results = [1]
+    # init
+    if s[1] == s[0] + 1:
+        results.append(2)
+    else:
+        results.append(1)
+
+    # recursive
+    for i, x in enumerate(s):
+        if i < 2:
+            continue
+        # what is the length of largest subset ending in x?
+        if x == s[i - 1] + 1:
+            results.append(results[i - 1] + 1)
+        else:
+            results.append(1)
+
+    return max(results)

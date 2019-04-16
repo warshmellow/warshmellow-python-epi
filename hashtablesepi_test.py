@@ -53,16 +53,18 @@ class TestHashTablesEpi(unittest.TestCase):
             """.split()
         self.assertEqual(nearest_repeated(s), 2)
 
-    # 12.6
+    # 12.9
     # Given an array of integers, return size of largest subarray of integers
     # in the array having the property that if two integers are
     # in the subset, then so are all integers between them
     def test_len_longest_contained_interval(self):
-        test_pairs = [([], None), ([1], None), ([1, 4], 2), ([1, 2, 5, 3], 3),
+        test_pairs = [([], None), ([1], None), ([1, 4], None), ([1, 2, 5,
+                                                                 3], 3),
                       ([3, -2, 7, 9, 8, 1, 2, 0, -1, 5, 8], 6)]
 
         for s, expected in test_pairs:
-            self.assertEqual(len_longest_contained_interval(s), expected)
+            self.assertEqual(len_longest_contained_interval(s), expected,
+                             str(s))
 
 
 if __name__ == '__main__':
