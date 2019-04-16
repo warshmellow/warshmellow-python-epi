@@ -53,6 +53,14 @@ class TestHashTablesEpi(unittest.TestCase):
             """.split()
         self.assertEqual(nearest_repeated(s), 2)
 
+    # 12.6
+    def test_smallest_cover(self):
+        s = """
+            my paramount object in this struggle is to save the union
+            """.split()
+        self.assertEqual(smallest_cover(s, set("save the union".split())),
+                         (8, 10), str(s))
+
     # 12.9
     # Given an array of integers, return size of largest subarray of integers
     # in the array having the property that if two integers are

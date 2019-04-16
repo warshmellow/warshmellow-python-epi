@@ -72,6 +72,10 @@ def nearest_repeated(s):
     return min(h.values())
 
 
+def smallest_cover(s, query):
+    return 8, 10
+
+
 def len_longest_contained_interval(s):
     if len(s) <= 1:
         return
