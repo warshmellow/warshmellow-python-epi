@@ -73,7 +73,16 @@ def nearest_repeated(s):
 
 
 def smallest_cover(s, query):
-    return 8, 10
+    def list_contains(subarray, keywords):
+        sub_counts = Counter(subarray)
+        keywords_counts = Counter(keywords)
+        return sub_counts & keywords_counts == keywords_counts
+
+    k, j = min([(i, j) for i in range(len(s))
+                for j in range(i + 1,
+                               len(s) + 1) if list_contains(s[i:j], query)],
+               key=lambda x: len(s[x[0]:x[1]]))
+    return k, j - 1
 
 
 def len_longest_contained_interval(s):
