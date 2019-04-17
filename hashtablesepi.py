@@ -85,6 +85,31 @@ def smallest_cover(s, query):
     return k, j - 1
 
 
+def smallest_cover_quad(s, query):
+    def list_contains(subarray, keywords):
+        sub_counts = Counter(subarray)
+        keywords_counts = Counter(keywords)
+        return sub_counts & keywords_counts == keywords_counts
+
+    # Find smallest set starting at 0 that covers the set
+    j = 0
+    while not list_contains(s[0:j], query):
+        j += 1
+
+    # Update
+    i = 0
+    contains_indices = [(i, j)]
+    while i < len(s) and j < len(s) + 1:
+        if list_contains(s[i:j], query):
+            contains_indices.append((i, j))
+            i += 1
+        else:
+            j += 1
+
+    min_i, min_j = min(contains_indices, key=lambda x: x[1] - x[0])
+    return min_i, min_j - 1
+
+
 def len_longest_contained_interval(s):
     if len(s) <= 1:
         return
