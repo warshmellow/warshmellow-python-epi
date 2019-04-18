@@ -78,6 +78,9 @@ def smallest_cover(s, query):
         keywords_counts = Counter(keywords)
         return sub_counts & keywords_counts == keywords_counts
 
+    if not list_contains(s, query):
+        return
+
     k, j = min([(i, j) for i in range(len(s))
                 for j in range(i + 1,
                                len(s) + 1) if list_contains(s[i:j], query)],
@@ -85,24 +88,35 @@ def smallest_cover(s, query):
     return k, j - 1
 
 
-def smallest_cover_quad(s, query):
-    def list_contains(subarray, keywords):
-        sub_counts = Counter(subarray)
-        keywords_counts = Counter(keywords)
-        return sub_counts & keywords_counts == keywords_counts
+def smallest_cover_lin(s, query):
+    def counter_contains(bigger, smaller):
+        return bigger & smaller == smaller
+
+    if not counter_contains(Counter(s), Counter(query)):
+        return
+
+    query_counts = Counter(query)
+    current_counts = Counter()
 
     # Find smallest set starting at 0 that covers the set
-    j = 0
-    while not list_contains(s[0:j], query):
-        j += 1
+    # Fill out Counter of query keywords in s[0:j]
+
+    j = len([
+        current_counts.update([s[j]]) for j in range(len(s))
+        if not counter_contains(current_counts, query_counts)
+    ])
 
     # Update
     i = 0
     contains_indices = [(i, j)]
     while i < len(s) and j < len(s) + 1:
-        if list_contains(s[i:j], query):
+        if counter_contains(current_counts, query_counts):
             contains_indices.append((i, j))
+            current_counts[s[i]] -= 1
             i += 1
+        elif j < len(s):
+            current_counts.update(s[j])
+            j += 1
         else:
             j += 1
 

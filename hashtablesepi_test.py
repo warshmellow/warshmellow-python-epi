@@ -60,7 +60,7 @@ class TestHashTablesEpi(unittest.TestCase):
             """.split()
         self.assertEqual(smallest_cover(s, set("save the union".split())),
                          (8, 10), str(s))
-        self.assertEqual(smallest_cover_quad(s, set("save the union".split())),
+        self.assertEqual(smallest_cover_lin(s, set("save the union".split())),
                          (8, 10), str(s))
 
     # 12.9
