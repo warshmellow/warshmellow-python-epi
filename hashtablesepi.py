@@ -59,6 +59,10 @@ class LRUCache:
         del self._table[key]
 
 
+def lca(a, b):
+    return
+
+
 def nearest_repeated(s):
     indices_by_entry = defaultdict(list)
     for i, entry in enumerate(s):

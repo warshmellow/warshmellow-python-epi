@@ -5,6 +5,8 @@ from hypothesis import given
 
 from hashtablesepi import *
 
+from bintreesepi import BinTree
+
 
 class TestHashTablesEpi(unittest.TestCase):
 
@@ -43,6 +45,26 @@ class TestHashTablesEpi(unittest.TestCase):
     # Compute the Lowest Common Ancestor of two nodes in time
     # proportional to distance between the nodes, and without
     # going up to the root
+    @unittest.skip('unfinished')
+    def test_lca(self):
+        """
+        A
+            B
+            C
+                D
+                E
+                    F
+        """
+        atree = BinTree()
+        btree = BinTree(parent=atree)
+        ctree = BinTree(parent=atree)
+        dtree = BinTree(parent=ctree)
+        etree = BinTree(parent=ctree)
+        ftree = BinTree(parent=etree)
+
+        self.assertEqual(lca(dtree, etree), ctree)
+        self.assertEqual(lca(dtree, ftree), ctree)
+        self.assertEqual(lca(etree, ftree), etree)
 
     # 12.5
     # Find the nearest repeated entries in an array
