@@ -45,7 +45,6 @@ class TestHashTablesEpi(unittest.TestCase):
     # Compute the Lowest Common Ancestor of two nodes in time
     # proportional to distance between the nodes, and without
     # going up to the root
-    @unittest.skip('unfinished')
     def test_lca(self):
         """
         A

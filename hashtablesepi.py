@@ -60,7 +60,19 @@ class LRUCache:
 
 
 def lca(a, b):
-    return
+    def path_to_root(x):
+        curr = x
+        while curr:
+            yield curr
+            curr = curr.parent
+
+    a_path = path_to_root(a)
+    b_path = path_to_root(b)
+
+    bset = set(b_path)
+    for x in a_path:
+        if x in bset:
+            return x
 
 
 def nearest_repeated(s):
