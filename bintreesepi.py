@@ -6,6 +6,28 @@ class BinTree:
         self.right = right
 
     @staticmethod
+    def inorder(root):
+        if not root:
+            return []
+
+        result = []
+        result.extend(BinTree.inorder(root.left))
+        result.extend([root.item])
+        result.extend(BinTree.inorder(root.right))
+        return result
+
+    @staticmethod
+    def preorder(root):
+        if not root:
+            return []
+
+        result = []
+        result.extend([root.item])
+        result.extend(BinTree.preorder(root.left))
+        result.extend(BinTree.preorder(root.right))
+        return result
+
+    @staticmethod
     def height(root):
         if not root:
             return -1
@@ -30,3 +52,7 @@ class BinTree:
         return BinTree.is_height_balanced(
             root.left) and BinTree.is_height_balanced(root.right) and abs(
                 BinTree.height(root.left) - BinTree.height(root.right)) <= 1
+
+    @classmethod
+    def reconstruct(cls, inorder, preorder):
+        return cls()
