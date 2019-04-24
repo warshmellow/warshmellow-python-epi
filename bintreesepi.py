@@ -71,3 +71,7 @@ class BinTree:
         right_subtree = cls.reconstruct(right_inorder, right_preorder)
 
         return cls(item=root_item, left=left_subtree, right=right_subtree)
+
+    @classmethod
+    def reconstruct_with_marker(cls, preorder_with_marker):
+        return cls(item=preorder_with_marker[0])
