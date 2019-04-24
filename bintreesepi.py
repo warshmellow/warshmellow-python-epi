@@ -55,4 +55,19 @@ class BinTree:
 
     @classmethod
     def reconstruct(cls, inorder, preorder):
-        return cls()
+        if len(inorder) == 0 or len(preorder) == 0:
+            return
+
+        root_item = preorder[0]
+
+        root_idx_in_inorder = inorder.index(root_item)
+        left_inorder = inorder[:root_idx_in_inorder]
+        right_inorder = inorder[root_idx_in_inorder + 1:]
+
+        left_preorder = preorder[1:root_idx_in_inorder + 1]
+        right_preorder = preorder[root_idx_in_inorder + 1:]
+
+        left_subtree = cls.reconstruct(left_inorder, left_preorder)
+        right_subtree = cls.reconstruct(right_inorder, right_preorder)
+
+        return cls(item=root_item, left=left_subtree, right=right_subtree)

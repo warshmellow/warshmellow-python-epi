@@ -46,11 +46,15 @@ class TestBinTreesEpi(unittest.TestCase):
 
         h = BinTree(item='h', left=b, right=c)
 
-        reconstructed = BinTree.reconstruct(inorder="fbaehcdig",
-                                            preorder="hbfeacdgi")
+        expected_inorder, expected_preorder = "fbaehcdig", "hbfeacdgi"
 
-        self.assertEqual(BinTree.inorder(reconstructed), "fbaehcdig")
-        self.assertEqual(BinTree.preorder(reconstructed), "hbfaecdgi")
+        reconstructed = BinTree.reconstruct(inorder=expected_inorder,
+                                            preorder=expected_preorder)
+
+        self.assertEqual("".join(BinTree.inorder(reconstructed)),
+                         expected_inorder)
+        self.assertEqual("".join(BinTree.preorder(reconstructed)),
+                         expected_preorder)
 
 
 if __name__ == '__main__':
