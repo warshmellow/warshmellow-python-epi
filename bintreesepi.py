@@ -74,4 +74,16 @@ class BinTree:
 
     @classmethod
     def reconstruct_with_marker(cls, preorder_with_marker):
-        return cls(item=preorder_with_marker[0])
+        print(preorder_with_marker)
+        if len(preorder_with_marker) == 0:
+            return None, None
+
+        curr_item = preorder_with_marker[0]
+        if curr_item == '':
+            left, right = cls.reconstruct_with_marker(preorder_with_marker[1:])
+            return None, left
+        root = cls(item=curr_item)
+        left, right = cls.reconstruct_with_marker(preorder_with_marker[1:])
+        root.left = left
+        root.right = right
+        return root, None

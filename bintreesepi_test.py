@@ -58,26 +58,35 @@ class TestBinTreesEpi(unittest.TestCase):
 
     # 9.13
     def test_reconstruct_with_marker(self):
+        """
         a = BinTree(item='a')
         f = BinTree(item='f')
         e = BinTree(item='e', left=a)
         b = BinTree(item='b', left=f, right=e)
-
+        """
+        """
+            d
+                g
+                    -
+                    i
+        """
         i = BinTree(item='i')
         g = BinTree(item='g', left=i)
         d = BinTree(item='d', right=g)
-        c = BinTree(item='c', right=d)
+        #c = BinTree(item='c', right=d)
 
-        h = BinTree(item='h', left=b, right=c)
+        # h = BinTree(item='h', left=b, right=c)
 
-        expected_inorder, expected_preorder = "fbaehcdig", "hbfeacdgi"
-
+        expected_inorder, expected_preorder = "dig", "dgi"
+        """
         preorder_blueprint = [
             'h', 'b', 'f', '', '', 'e', 'a', '', '', '', 'c', '', 'd', '', 'g',
             'i', '', '', ''
         ]
+        """
+        preorder_blueprint = ['d', '', 'g', 'i', '', '']
 
-        reconstructed = BinTree.reconstruct_with_marker(preorder_blueprint)
+        reconstructed = BinTree.reconstruct_with_marker(preorder_blueprint)[0]
 
         self.assertEqual("".join(BinTree.inorder(reconstructed)),
                          expected_inorder)
