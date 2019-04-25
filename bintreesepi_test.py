@@ -65,26 +65,28 @@ class TestBinTreesEpi(unittest.TestCase):
         b = BinTree(item='b', left=f, right=e)
         """
         """
-            d
-                g
-                    -
-                    i
+        h
+            c
+                d
+                    g
+                        -
+                        i
         """
         i = BinTree(item='i')
         g = BinTree(item='g', left=i)
         d = BinTree(item='d', right=g)
-        #c = BinTree(item='c', right=d)
+        c = BinTree(item='c', right=d)
 
-        # h = BinTree(item='h', left=b, right=c)
+        h = BinTree(item='h', right=c)
 
-        expected_inorder, expected_preorder = "dig", "dgi"
+        expected_inorder, expected_preorder = "hcdig", "hcdgi"
         """
         preorder_blueprint = [
             'h', 'b', 'f', '', '', 'e', 'a', '', '', '', 'c', '', 'd', '', 'g',
             'i', '', '', ''
         ]
         """
-        preorder_blueprint = ['d', '', 'g', 'i', '', '']
+        preorder_blueprint = ['h', '', 'c', '', 'd', '', 'g', 'i', '', '']
 
         reconstructed = BinTree.reconstruct_with_marker(preorder_blueprint)[0]
 
