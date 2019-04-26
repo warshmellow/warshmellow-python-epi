@@ -28,6 +28,17 @@ class BinTree:
         return result
 
     @staticmethod
+    def postorder(root):
+        if not root:
+            return []
+
+        result = []
+        result.extend(BinTree.preorder(root.left))
+        result.extend(BinTree.preorder(root.right))
+        result.extend([root.item])
+        return result
+
+    @staticmethod
     def height(root):
         if not root:
             return -1
@@ -88,3 +99,20 @@ class BinTree:
                 return
 
         return helper(iter(preorder_with_marker))
+
+    @classmethod
+    def reconstruct_from_postorder(cls, po):
+        def helper(postorder_iter):
+            try:
+                subtree_key = next(postorder_iter)
+                if subtree_key == '':
+                    return
+
+                right = helper(postorder_iter)
+                left = helper(postorder_iter)
+
+                return cls(subtree_key, left=left, right=right)
+            except StopIteration:
+                return
+
+        return helper(iter(reversed(po)))

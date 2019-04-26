@@ -85,6 +85,30 @@ class TestBinTreesEpi(unittest.TestCase):
         self.assertEqual("".join(BinTree.preorder(reconstructed)),
                          expected_preorder)
 
+    # 9.13 Variant
+    @unittest.skip("weird flipping")
+    def test_reconstruct_from_postorder(self):
+        """
+        h
+            c
+                d
+                    g
+                        -
+                        i
+        """
+
+        expected_inorder, expected_preorder, expected_postorder = "igdch", "hcdgi", "igdch"
+        postorder_blueprint = ['', '', 'i', '', 'g', '', 'd', '', 'c', '', 'h']
+
+        reconstructed = BinTree.reconstruct_from_postorder(postorder_blueprint)
+
+        self.assertEqual("".join(BinTree.inorder(reconstructed)),
+                         expected_inorder)
+        self.assertEqual("".join(BinTree.preorder(reconstructed)),
+                         expected_preorder)
+        self.assertEqual("".join(BinTree.postorder(reconstructed)),
+                         expected_postorder)
+
 
 if __name__ == '__main__':
     unittest.main()
